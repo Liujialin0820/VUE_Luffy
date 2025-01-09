@@ -1,18 +1,28 @@
+<script setup>
+import axios from "axios";
+import { onMounted, ref } from "vue";
+const banner_list = ref([]);
+
+onMounted(() => {
+  axios
+    .get("http://localhost:8000/banner/", {})
+    .then((res) => {
+      banner_list.value = res.data;
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+</script>
+
 <template>
   <el-carousel height="720px" :interval="3000" arrow="always">
-    <el-carousel-item>
-      <img src="/static/image/alex.jpeg" alt="" />
-    </el-carousel-item>
-    <el-carousel-item>
-      <img src="/static/image/banner1.png" alt="" />
-    </el-carousel-item>
-    <el-carousel-item>
-      <img src="/static/image/banner1.png" alt="" />
+    <el-carousel-item v-for="item in banner_list" :key="item.id">
+      <a :href="item.link"> <img :src="item.image_url" alt="" /></a>
     </el-carousel-item>
   </el-carousel>
 </template>
-
-<script setup></script>
 
 <style scoped>
 .el-carousel__item h3 {
