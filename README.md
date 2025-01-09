@@ -6,6 +6,7 @@
 
 ```shell
 npm init vue@latest
+
 ```
 
 
@@ -76,4 +77,23 @@ export default defineConfig({
 </template>
 ```
 
-# 
+# 配置axios
+
+```shell
+npm i axios -S
+```
+
+在main.js中引用 axios插件
+
+```javascript
+import axios from 'axios'; // 从node_modules目录中导入包
+// 允许ajax发送请求时附带cookie
+axios.defaults.withCredentials = false;
+
+Vue.prototype.$axios = axios; // 把对象挂载vue中
+```
+
+
+
+
+
